@@ -8,15 +8,16 @@ galleryContainer.insertAdjacentHTML("beforeend", createGallery);
 
 function createGallery(item) {
 return galleryItems.map(({previev, oryginal, description}) = {
-    return `<div class = "gallery__item">
-    <a class = "gallery__link" href = "${original.value}">
-    <img class = "gallery__image"
-    src = "${previev}"
-    data-source = "${original}"
-    alt = "${description}"
-    />
+    return <div class="gallery__item">
+    <a class="gallery__link" href="large-image.jpg">
+      <img
+        class="gallery__image"
+        src="small-image.jpg"
+        data-source="large-image.jpg"
+        alt="Image description"
+      />
     </a>
-    </div>`
+  </div>  
 })
 } 
 
