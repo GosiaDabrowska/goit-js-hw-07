@@ -4,24 +4,26 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 
 const galleryContainer = document.querySelector(`.gallery`);
-galleryContainer.insertAdjacentHTML("beforeend", createGallery);
 
-function createGallery(item) {
-return galleryItems.map(({previev, oryginal, description}) = {
-    return <div class="gallery__item">
+function createGalleryItem(image) {
+    return `<li class="gallery__item">
     <a class="gallery__link" href="large-image.jpg">
       <img
         class="gallery__image"
-        src="small-image.jpg"
-        data-source="large-image.jpg"
-        alt="Image description"
+        src="${image.previev}"
+        data-source="${image.original}"
+        alt="${image.description}"
       />
     </a>
-  </div>  
-})
+  </li>`
 } 
 
-galleryContainer.addEventListener("click" (ev) => {
+const galleryString = galleryItems.map(createGalleryItem).join("")
+
+galleryContainer.insertAdjacentHTML("afterbeing", galleryString);
+
+
+galleryContainer.addEventListener("click", (ev) => {
     ev.preventDefault();
     const lgImg = ev.target.dataset.source;
     const instance = basicLightbox.create(`
