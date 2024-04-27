@@ -7,10 +7,10 @@ const galleryContainer = document.querySelector(`.gallery`);
 
 function createGalleryItem(image) {
     return `<li class="gallery__item">
-    <a class="gallery__link" href="large-image.jpg">
+    <a class="gallery__link" href="">
       <img
         class="gallery__image"
-        src="${image.previev}"
+        src="${image.preview}"
         data-source="${image.original}"
         alt="${image.description}"
       />
@@ -20,7 +20,7 @@ function createGalleryItem(image) {
 
 const galleryString = galleryItems.map(createGalleryItem).join("")
 
-galleryContainer.insertAdjacentHTML("afterbeing", galleryString);
+galleryContainer.insertAdjacentHTML("afterbegin", galleryString);
 
 
 galleryContainer.addEventListener("click", (ev) => {
@@ -30,5 +30,13 @@ galleryContainer.addEventListener("click", (ev) => {
     <img src="${lgImg}" width="800" height="600">
 `)
 
-instance.show()    
-})
+instance.show()   
+
+const closeLightboxOnEscape = (ev) => {
+  if(ev.key === 'Escape') {
+    instance.close();
+    document.removeEventListener("keydown", closeLightboxOnEscape)
+  }
+}
+document.addEventListener("keydown", closeLightboxOnEscape)
+});
